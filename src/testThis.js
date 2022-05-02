@@ -60,11 +60,30 @@ class LinkedList {
     }
     return res;
   }
+
+  indexOf(element) {
+    let current = this.head;
+    let index = 0;
+
+    while (current) {
+      if (current.value === element) {
+        return index;
+      }
+
+      current = current.next;
+      index++;
+    }
+
+    return -1;
+  }
 }
 
 function removeKFromList(l, k) {
   if (!l || !k) {
     return;
+  }
+  if (l.indexOf(k) === -1) {
+    return l;
   }
   let current = l.head;
   let previous = null;

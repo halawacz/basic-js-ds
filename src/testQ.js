@@ -41,14 +41,16 @@ class Queue {
       this.last = node;
     }
     this.size++;
+    return this;
   }
 
   dequeue() {
-    if (!this.first) return;
-    let t = this.first;
+    if (!this.first) return null;
+
     if (this.first === this.last) {
       this.last = null;
     }
+    let t = this.first;
     this.first = this.first.next;
     this.size--;
     return t.value;
@@ -58,3 +60,9 @@ class Queue {
 module.exports = {
   Queue,
 };
+
+let myQ = new Queue();
+myQ.enqueue("John");
+myQ.enqueue("Brian");
+console.log(myQ);
+console.log(myQ.getUnderlyingList());
