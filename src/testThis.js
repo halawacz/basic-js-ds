@@ -77,11 +77,7 @@ function removeKFromList(l, k) {
         l.length--;
       } else {
         previous.next = current.next;
-        if (current.next) {
-          current = current.next;
-        } else {
-          current = previous;
-        }
+        current = current.next;
         l.length--;
       }
     } else {
@@ -95,3 +91,11 @@ function removeKFromList(l, k) {
 module.exports = {
   removeKFromList,
 };
+
+let myList = new LinkedList();
+myList.add(1);
+myList.add(2);
+myList.add(3);
+console.log(myList.toArray());
+console.log("\n after deletion");
+console.log(removeKFromList(myList, 3));

@@ -22,9 +22,9 @@ const { NotImplementedError } = require("../extensions/index.js");
  *   }
  * }
  */
-class ListNode {
-  constructor(x) {
-    this.x = x;
+class Node {
+  constructor(value) {
+    this.value = value;
     this.next = null;
   }
 }
@@ -34,9 +34,9 @@ class LinkedList {
     this.length = 0;
   }
 
-  add(x) {
+  add(value) {
     if (this.length === 0) {
-      this.head = new ListNode(x);
+      this.head = new Node(value);
     } else {
       let current = this.head;
 
@@ -45,53 +45,46 @@ class LinkedList {
         current = current.next;
       }
 
-      current.next = new ListNode(x);
+      current.next = new Node(value);
     }
 
     this.length++;
   }
 
-  toArray() {
-    let head = this.head;
-    let res = [];
-    while (head) {
-      res.push(head.x);
-      head = head.next;
+  removeElementByValue(k) {
+    if (!k) {
+      return;
     }
-    return res;
-  }
-}
+    let current = this.head;
+    let previous = null;
 
-function removeKFromList(l, k) {
-  if (!l || !k) {
-    return;
-  }
-  let current = l.head;
-  let previous = null;
-
-  while (current) {
-    if (current.x === k) {
-      if (current === l.head) {
-        l.head = l.head.next;
-        current = l.head;
-        l.length--;
-      } else {
-        previous.next = current.next;
-        if (current.next) {
-          current = current.next;
+    while (current) {
+      if (current.value === k) {
+        if (current === this.head) {
+          this.head = this.head.next;
+          current = this.head;
+          this.length--;
         } else {
-          current = previous;
+          previous.next = current.next;
+          current = current.next;
+          this.length--;
         }
-        l.length--;
+      } else {
+        previous = current;
+        current = current.next;
       }
-    } else {
-      previous = current;
-      current = current.next;
     }
   }
-  return l;
 }
 
-module.exports = {
-  removeKFromList,
-};
+let myList = new LinkedList();
+myList.add(42);
+myList.add(3);
+myList.add(99);
+console.log(myList.head.value);
+console.log(myList.length);
+myList.removeElementByValue(3);
+console.log("\n after deletion");
+console.log(myList.head.value);
+console.log(myList.length);
+console.log(myList);
