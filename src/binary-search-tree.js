@@ -20,11 +20,7 @@ class BinarySearchTree {
   }
 
   root() {
-    if (!this.root || this.root == null) {
-      return "root";
-    } else {
-      return this.root;
-    }
+    return this.root;
   }
 
   add(data) {
@@ -35,7 +31,7 @@ class BinarySearchTree {
       if (!node) {
         return new Node(data);
       }
-      if ((node.data = data)) {
+      if (node.data === data) {
         return node;
       }
       if (data < node.data) {
@@ -48,9 +44,22 @@ class BinarySearchTree {
     }
   }
 
-  has(/* data */) {
-    throw new NotImplementedError("Not implemented");
-    // remove line with error and write your code here
+  has(data) {
+    return searchWithin(this.root, data);
+
+    function searchWithin(node, data) {
+      if (!node) {
+        return false;
+      }
+
+      if (node.data === data) {
+        return true;
+      }
+
+      return data < node.data
+        ? searchWithin(node.left, data)
+        : searchWithin(node.right, data);
+    }
   }
 
   find(/* data */) {
