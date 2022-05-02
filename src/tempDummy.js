@@ -45,17 +45,19 @@ function removeKFromList(l, k) {
   let previous = dummy;
   let current = l;
 
-  while (current) {
-    if (current.value === k) {
-      previous.next = current.next;
-      current = current.next;
-    } else {
-      previous = current;
-      current = current.next;
-    }
+  while(current) {
+      if(current.value === k) {
+          previous.next = current.next;
+          current = current.next
+
+      } else {
+          previous = current;
+          current = current.next;
+      }
   }
 
   return dummy.next;
+
 }
 
 module.exports = {
